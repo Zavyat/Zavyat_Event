@@ -1,38 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import { authenticateUser } from "./script"; // Import authentication function
-import Event from "./Event"; // Import Event component
 
-function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const isValid = authenticateUser(email, password);
-    if (isValid) {
-      setIsAuthenticated(true);
-      window.history.pushState({}, "", "/Event"); // Update URL without reloading
-    } else {
-      setError("Incorrect email or password");
-    }
-  };
-
-  useEffect(() => {
-    // Handle URL change
-    if (window.location.pathname === "/Event") {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-  if (isAuthenticated) {
-    return <Event />;
-  }
-
+function Login() {
   return (
     <div className="App">
       <header className="App-header">
@@ -51,7 +22,7 @@ function App() {
             </div>
             <form
               style={{ fontSize: "15px", fontWeight: "bold" }}
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit} // Handle form submission
             >
               <div className="row" style={{ marginBottom: "20px" }}>
                 <label htmlFor="inputEmail3" className="col-4 col-form-label">
@@ -71,9 +42,9 @@ function App() {
                     className="form-control"
                     id="inputEmail3"
                     placeholder="Enter your Email"
-                    required
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
+                    required // Make the input required
+                    // value={email}
+                    // onChange={(event) => setEmail(event.target.value)}
                   />
                 </div>
               </div>
@@ -98,13 +69,13 @@ function App() {
                     className="form-control"
                     id="inputPassword3"
                     placeholder="Enter your Password"
-                    required
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
+                    required // Make the input required
+                    // value={password}
+                    // onChange={(event) => setPassword(event.target.value)}
                   />
                 </div>
               </div>
-              {error && <div style={{ color: "red" }}>{error}</div>}
+              {/* {error && <div style={{ color: "red" }}>{error}</div>} */}
               <div
                 className="form-check"
                 style={{ textAlign: "center", paddingBottom: "20px" }}
@@ -130,4 +101,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;
